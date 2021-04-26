@@ -9,7 +9,7 @@
 ## Nos conectamos al contenedor de mongodb para configurar lo faltante
 
 ``` 
-docker exec -it MRSI-MongoDB bash
+docker exec -it MTIE-MongoDB bash
 mongo -u root -p
 ```
 
@@ -25,7 +25,7 @@ use dbdata
     
 db.createUser({
   user: 'dbo-operator',
-  pwd: 'operadoradmin',
+  pwd: 'XXXXXXXXXX',
   roles: [
     { role: 'readWrite', db: 'dbdata' },
     { role: 'read', db: 'local' },

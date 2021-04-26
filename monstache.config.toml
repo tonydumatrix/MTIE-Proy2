@@ -4,7 +4,9 @@ elasticsearch-urls = ["http://172.17.94.125:9200"]
 elasticsearch-max-conns = 10
 #namespace-regex ="dbdata.^"
 #direct-read-namespaces = ["dbdata.economico"]
-change-stream-namespaces = ["dbdata.economico"]
+#change-stream-namespaces = ["dbdata.economico"]
+# se agrega la coleccion de docentes
+change-stream-namespaces = ["dbdata.docentes"]
 index-as-update = true
 elasticsearch-max-seconds = 5
 enable-http-server = true
@@ -48,23 +50,32 @@ verbose = true
 # do not exit after full-sync, rather continue tailing the oplog
 exit-after-direct-reads = false
 
+
+#se realizan cambios para llamar a la coleccion docentes
 [[mapping]]
-namespace = "dbdata.economico"
-index = "dataintelindex_economico"
+namespace = "dbdata.docentes"
+index = "dataintelindex_docentes"
 
 [[script]]
-namespace = "dbdata.economico"
+namespace = "dbdata.docentes"
 script = """
 module.exports = function(doc) {
   var newdoc = {
-    periodo: doc.periodo,
-    entidadFederativa: doc.entidadFederativa,
-    municipio: doc.municipio,
-    sector: doc.sector,
-    hombres: doc.hombres,
-    mujeres: doc.mujeres,
-    date: doc.date,
-    location: doc.location
+    campus: doc.campus,
+    facultad: doc.facultad,
+    programa: doc.programa,
+    nivel: doc.nivel,
+    folio: doc.folio,
+    paterno: doc.paterno,
+    materno: doc.materno,
+    nombre: doc.nombre,
+    correo: doc.correo,
+    grupo: doc.grupo,
+    clavemat: doc.clavemat,
+    materia: doc.materia,
+    hrssemana: doc.hrssemana,
+    dia: doc.dia,
+    corte: doc.corte
   }
   return newdoc;
 }
